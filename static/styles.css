@@ -1,0 +1,74 @@
+body {
+    font-family:'Lato', sans-serif;
+    background-color: #fff3b0;
+    color: #003049;
+    margin: 0;
+    padding: 30px;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .section {
+    background-color: #d0f4de;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #003049;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #fcf6bd;
+    color: #003049;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: #f1e9a0;
+  }
+
+  .rank-row {
+    margin-top: 15px;
+  }
+
+  pre {
+    background-color: #fff6eb;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    color: #003049;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+  }
+#voter-groups-display,
+#voter-groups-display ~ h3,
+#voter-groups-display:parent {
+  display: none !important;
+}

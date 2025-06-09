@@ -1,510 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PB-EAR Algorithm Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-body {
-    font-family:'Lato', sans-serif;
-    background-color: #fff3b0;
-    color: #003049;
-    margin: 0;
-    padding: 30px;
-    max-width: 800px;
-    margin-inline: auto;
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .section {
-    background-color: #d0f4de;
-    padding: 25px;
-    margin-bottom: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
-
-  label {
-    display: block;
-    font-weight: 600;
-    margin-top: 15px;
-    color: #003049;
-  }
-
-  input,
-  select,
-  button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-
-  button {
-    background-color: #fcf6bd;
-    color: #003049;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-  }
-
-  button:hover {
-    background-color: #f1e9a0;
-  }
-
-  .rank-row {
-    margin-top: 15px;
-  }
-
-  pre {
-    background-color: #fff6eb;
-    padding: 15px;
-    border-radius: 8px;
-    overflow-x: auto;
-    color: #003049;
-    font-family: 'Lato', sans-serif;
-    font-size: 15px;
-  }
-#voter-groups-display,
-#voter-groups-display ~ h3, /* גם הכותרת */
-#voter-groups-display:parent {
-  display: none !important;
-}
-
-
-</style>
-
-
-</head>
-<body>
-
-  <h1>PB-EAR Algorithm Demo 🏦</h1>
-  <img src="{{ url_for('static', filename='picture_1.jpeg') }}"
-     alt="PB-EAR Visual"
-     style="max-width: 300px; display: block; margin: 0 auto 30px auto; border-radius: 16px;">
-    <div class="section">
-  <p style="font-size: 18px; text-align: center;">
-    <strong>Welcome to the PB-EAR Algorithm Demo!</strong>
-  </p>
-<p>
-  🧮 <strong>PB-EAR</strong> (Proportional Budgeting via Expanding Approval Rule)  
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   PB-EAR Algorithm Site
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script defer src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </script>
+ </head>
+ <body>
+  <h1>
+   PB-EAR Algorithm Demo 🏦
+  </h1>
+  <img alt="PB-EAR Visual" src="{{ url_for('static', filename='picture_1.jpeg') }}" style="max-width: 300px; display: block; margin: 0 auto 30px auto; border-radius: 16px;"/>
+  <div class="section">
+   <p style="font-size: 18px; text-align: center;">
+    <strong>
+     Welcome to the PB-EAR Algorithm Demo!
+    </strong>
+   </p>
+   <p>
+    🧮
+    <strong>
+     PB-EAR
+    </strong>
+    (Proportional Budgeting via Expanding Approval Rule)  
   is an algorithm designed for participatory budgeting.  
   It selects a set of projects that fairly and proportionally represent the community's ranked preferences.
-</p>
-
-  <p>
-    📄 You can read the full research paper here:<br>  
+   </p>
+   <p>
+    📄 You can read the full research paper here:
+    <br/>
     <a href="https://arxiv.org/abs/1911.00864v2" target="_blank">
-      Proportionally Representative Participatory Budgeting with Ordinal Preferences
+     Proportionally Representative Participatory Budgeting with Ordinal Preferences
     </a>
-  </p>
-  <p>
-    🙋‍♀️ Want to know who built this?<br> 
-    <a href="/about">Check out the About page!</a>
-  </p>
-</div>
-
-
-
+   </p>
+   <p>
+    🙋‍♀️ Want to know who built this?
+    <br/>
+    <a href="/about">
+     Check out the About page!
+    </a>
+   </p>
+  </div>
   <div class="section">
-<div class="section">
-  <h3 style="text-align: center;">How to Use This Demo ? 🔧</h3>
-
-  <p>
-    To run the PB-EAR algorithm, please provide the following inputs:
-  </p>
-
-  <ul style="font-size: 16px; padding-left: 20px; line-height: 1.8;">
-    <li style="margin-bottom: 12px;">
-      <strong>Budget:</strong> The total amount of money available for funding projects.
-    </li>
-
-    <li style="margin-bottom: 12px;">
-      <strong>Projects:</strong> Enter the number of projects and assign a name and cost to each one (e.g., "Library", "Playground").
-    </li>
-
-    <li style="margin-bottom: 12px;">
-      <strong>Voter Groups:</strong> Define one or more groups of voters.  
+   <div class="section">
+    <h3 style="text-align: center;">
+     How to Use This Demo ? 🔧
+    </h3>
+    <p>
+     To run the PB-EAR algorithm, please provide the following inputs:
+    </p>
+    <ul style="font-size: 16px; padding-left: 20px; line-height: 1.8;">
+     <li style="margin-bottom: 12px;">
+      <strong>
+       Budget:
+      </strong>
+      The total amount of money available for funding projects.
+     </li>
+     <li style="margin-bottom: 12px;">
+      <strong>
+       Projects:
+      </strong>
+      Enter the number of projects and assign a name and cost to each one (e.g., "Library", "Playground").
+     </li>
+     <li style="margin-bottom: 12px;">
+      <strong>
+       Voter Groups:
+      </strong>
+      Define one or more groups of voters.  
       Each group should include:
       <ul style="padding-left: 20px; margin-top: 8px; line-height: 1.6;">
-        <li>The number of voters in the group (e.g., 30 people)</li>
-        <li>A weight for each voter — a number between <strong>0 and 1</strong> that reflects their individual influence</li>
-        <li>A ranked list of the projects, ordered from most to least preferred</li>
+       <li>
+        The number of voters in the group (e.g., 30 people)
+       </li>
+       <li>
+        A weight for each voter — a number between
+        <strong>
+         0 and 1
+        </strong>
+        that reflects their individual influence
+       </li>
+       <li>
+        A ranked list of the projects, ordered from most to least preferred
+       </li>
       </ul>
-    </li>
-  </ul>
-
-  <p style="margin-top: 20px;">
-    You can simulate both large groups of voters with identical preferences and individual voters with lower weights or unique preferences.
-  </p>
-
-  <p style="margin-top: 10px;">
-    <strong>Note:</strong> The total weight of a group should equal the number of voters in that group.
+     </li>
+    </ul>
+    <p style="margin-top: 20px;">
+     You can simulate both large groups of voters with identical preferences and individual voters with lower weights or unique preferences.
+    </p>
+    <p style="margin-top: 10px;">
+     <strong>
+      Note:
+     </strong>
+     The total weight of a group should equal the number of voters in that group.
     For example, if you have 10 voters, each should have weight 1.0 (or two voters with weight 0.5, and so on).
-  </p>
-
-  <p style="margin-top: 10px;">
-    Once all inputs are provided, click the submission button to run the PB-EAR algorithm and view the selected projects based on your scenario.
-  </p>
-  <button onclick="fillExample3()" style="margin-top: 20px;">
-  📊 Fill Example Demo
-</button>
-
-</div>
-
-
-    <label>Budget💵:</label>
-    <input type="number" id="budget" step="0.01" min="0" required>
-
-    
-    <label>Number of projects:</label>
-    <input type="number" id="num-projects" min="1">
-    <button type="button" onclick="generateProjectFields()">Create Project Fields</button>
-
-    <div id="project-fields"></div>
-
-    <div id="next-button-container" style="display: none; margin-top: 15px;">
-        <button type="button" onclick="generatePreferenceInputs()">
-        Next: Define Voter Group
-        </button>
+    </p>
+    <p style="margin-top: 10px;">
+     Once all inputs are provided, click the submission button to run the PB-EAR algorithm and view the selected projects based on your scenario.
+    </p>
+    <button onclick="fillExample3()" style="margin-top: 20px;">
+     📊 Fill Example Demo
+    </button>
+   </div>
+   <label>
+    Budget💵:
+   </label>
+   <input id="budget" min="0" required="" step="0.01" type="number"/>
+   <label>
+    Number of projects:
+   </label>
+   <input id="num-projects" min="1" type="number"/>
+   <button onclick="generateProjectFields()" type="button">
+    Create Project Fields
+   </button>
+   <div id="project-fields">
+   </div>
+   <div id="next-button-container" style="display: none; margin-top: 15px;">
+    <button onclick="generatePreferenceInputs()" type="button">
+     Next: Define Voter Group
+    </button>
+   </div>
+   <div class="section" id="voter-form" style="display:none;">
+    <h3>
+     Voter Group Input
+    </h3>
+    <div class="section" id="voter-group-list" style="display: none;">
+     <h3>
+      🗳️ Voter Groups Entered
+     </h3>
     </div>
-
-  <div id="voter-form" class="section" style="display:none;">
-    <h3>Voter Group Input</h3>
-    <div id="voter-group-list" class="section" style="display: none;">
-  <h3>🗳️ Voter Groups Entered</h3>
-</div>
-
-    
-    <label>Number of voters in group:</label>
-    <input type="number" id="voter-count" min="1" value="1">
-    
-    <label>Weight per voter:</label>
-    <input type="number" id="voter-weight" step="0.1" value="1.0">
-    
-    <div id="rank-inputs"></div>
-    
-    <button onclick="submitVoterGroup()">Submit Group</button>
+    <label>
+     Number of voters in group:
+    </label>
+    <input id="voter-count" min="1" type="number" value="1"/>
+    <label>
+     Weight per voter:
+    </label>
+    <input id="voter-weight" step="0.1" type="number" value="1.0"/>
+    <div id="rank-inputs">
+    </div>
+    <button onclick="submitVoterGroup()">
+     Submit Group
+    </button>
+   </div>
+   <form action="/run" method="post" onsubmit="return prepareSubmission();">
+    <input id="form-budget" name="budget" type="hidden"/>
+    <input id="projects-json" name="projects_json" type="hidden"/>
+    <input id="voters-json" name="voters_json" type="hidden"/>
+    <button type="submit">
+     Submit All to PB-EAR
+    </button>
+   </form>
   </div>
-
-  <script>
-    
-    let projectList = [];
-
-function generateProjectFields() {
-  const container = document.getElementById("project-fields");
-  const num = parseInt(document.getElementById("num-projects").value);
-  container.innerHTML = '';
-  projectList = [];
-
-  for (let i = 0; i < num; i++) {
-    const label = document.createElement("label");
-    label.textContent = `Project ${i + 1}:`;
-
-    const nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.className = "project-name";
-    nameInput.placeholder = "e.g. Clinic";
-
-    const costInput = document.createElement("input");
-    costInput.type = "number";
-    costInput.step = "0.01";
-    costInput.min = "0";
-    costInput.className = "project-cost";
-    costInput.placeholder = "Cost (e.g. 40)";
-
-    container.appendChild(label);
-    container.appendChild(nameInput);
-    container.appendChild(costInput);
-  }
-
-  const inputs = container.querySelectorAll(".project-name");
-inputs.forEach(input => {
-  input.addEventListener("input", () => validateProjectFields());
-});
-const costInputs = container.querySelectorAll(".project-cost");
-costInputs.forEach(input => {
-  input.addEventListener("input", () => validateProjectFields());
-});
-
-function validateProjectFields() {
-  const nameInputs = Array.from(document.querySelectorAll(".project-name"));
-  const costInputs = Array.from(document.querySelectorAll(".project-cost"));
-
-  const allNamesFilled = nameInputs.every(inp => inp.value.trim() !== "");
-  const allCostsValid = costInputs.every(inp => {
-    const val = parseFloat(inp.value);
-    return !isNaN(val) && val >= 0;
-  });
-
-  const names = nameInputs.map(inp => inp.value.trim().toLowerCase());
-  const hasDuplicates = new Set(names).size !== names.length;
-  const allValidNames = names.every(n => /^[a-zA-Z0-9 ]+$/.test(n));
-
-  nameInputs.forEach(inp => {
-    const val = inp.value.trim();
-    if (!/^[a-zA-Z0-9 ]*$/.test(val)) {
-      inp.style.borderColor = 'red';
-    } else {
-      inp.style.borderColor = '#ccc';
-    }
-  });
-
-  if (allNamesFilled && allCostsValid && allValidNames && !hasDuplicates) {
-    document.getElementById("next-button-container").style.display = "block";
-  } else {
-    document.getElementById("next-button-container").style.display = "none";
-  }
-}
-}
-
-
-function generatePreferenceInputs() {
-  const inputs = document.querySelectorAll(".project-name");
-  projectList = Array.from(inputs)
-    .map(input => input.value.trim())
-    .filter(Boolean);
-
-  if (projectList.length === 0) return;
-
-  const rankInputs = document.getElementById("rank-inputs");
-  rankInputs.innerHTML = '';
-
-  projectList.forEach((_, i) => {
-    const rank = i + 1;
-    const div = document.createElement('div');
-    div.className = 'rank-row';
-
-    const label = document.createElement('label');
-    label.innerText = `Rank ${rank}:`;
-
-    const select = document.createElement('select');
-    select.name = `rank-${rank}`;
-    projectList.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p;
-      opt.text = p;
-      select.appendChild(opt);
-    });
-
-    div.appendChild(label);
-    div.appendChild(select);
-    rankInputs.appendChild(div);
-  });
-
-  document.getElementById("voter-form").style.display = 'block';
-}
-
-  </script>
-
-
-<form method="post" action="/run" onsubmit="return prepareSubmission();">
-  <input type="hidden" name="budget" id="form-budget">
-  <input type="hidden" name="projects_json" id="projects-json">
-  <input type="hidden" name="voters_json" id="voters-json">
-  <button type="submit">Submit All to PB-EAR</button>
-</form>
-
-
-<script>
-  let voterGroups = [];
-
-function submitVoterGroup() {
-  const numVoters = parseInt(document.getElementById("voter-count").value);
-    if (isNaN(numVoters) || numVoters <= 0) {
-        alert("Number of voters must be a positive integer.");
-    return;
-}
-
-  const weight = parseFloat(document.getElementById("voter-weight").value);
-  const selects = document.querySelectorAll("#rank-inputs select");
-  const preferences = Array.from(selects).map(s => s.value);
-
-  // Validation: no duplicate preferences
-  const unique = new Set(preferences);
-  if (unique.size !== preferences.length) {
-    alert("Each project must appear only once in the rankings.");
-    return;
-  }
-
-  // Validation: weight must be between 0 and 1 (inclusive)
-  if (isNaN(weight) || weight <= 0 || weight > 1) {
-    alert("Weight must be a number greater than 0 and at most 1.");
-    return;
-  }
-
-  // Add group to internal list
-  for (let i = 0; i < numVoters; i++) {
-    voterGroups.push([weight, preferences]);
-  }
-
-  // Validation: total weight must be an integer
-  if (!validateTotalWeightIsInteger()) {
-    alert("Total voter weight must be an integer. Check group sizes and weights.");
-    // Undo group addition
-    for (let i = 0; i < numVoters; i++) voterGroups.pop();
-    return;
-  }
-
-  // Update hidden input
-  document.getElementById("voters-json").value =
-    JSON.stringify(voterGroups);
-
-  // Show group summary
-  showSubmittedGroup(numVoters, weight, preferences);
-
-  // Reset form
-  document.getElementById("voter-count").value = 1;
-  document.getElementById("voter-weight").value = 1.0;
-  selects.forEach(select => (select.selectedIndex = 0));
-  document.querySelector("#voter-form button").textContent = "➕ Add Another Group";
-}
-
-
-
-function updateVoterGroupsDisplay() {
-    document.getElementById("voter-groups-display").textContent =
-      JSON.stringify(voterGroups, null, 2);
-    document.getElementById("voters-json").value =
-      JSON.stringify(voterGroups);
-}
-
-function prepareSubmission() {
-  const budgetVal = parseFloat(document.getElementById("budget").value);
-  if (isNaN(budgetVal) || budgetVal < 0) {
-    alert("Please enter a valid non-negative budget.");
-    return false;
-  }
-  document.getElementById("form-budget").value = budgetVal;
-
-  const names = document.querySelectorAll(".project-name");
-  const costs = document.querySelectorAll(".project-cost");
-  const projects = [];
-
-  for (let i = 0; i < names.length; i++) {
-    const name = names[i].value.trim();
-    const cost = parseFloat(costs[i].value);
-
-    if (!name) {
-      alert(`Project ${i + 1} has no name.`);
-      return false;
-    }
-
-    if (isNaN(cost) || cost < 0) {
-      alert(`Project "${name}" must have a valid non-negative cost.`);
-      return false;
-    }
-
-    projects.push([name, cost]);
-  }
-
-  document.getElementById("projects-json").value =
-    JSON.stringify(projects);
-  return true;
-}
-
-
-  function showSubmittedGroup(count, weight, preferences) {
-  const container = document.getElementById("voter-group-list");
-  container.style.display = "block";
-
-  const div = document.createElement("div");
-  div.style.marginBottom = "15px";
-  div.innerHTML = `
-    <p>🧑‍🤝‍🧑 <strong>Group of ${count} voters added</strong></p>
-    <p>💬 <strong>Preferences:</strong> ${preferences.join(" > ")}</p>
-    <p>⚖️ <strong>Weight per voter:</strong> ${weight}</p>
-    <hr>
-  `;
-  container.appendChild(div);
-}
-function hasDuplicateProjects() {
-  const names = Array.from(document.querySelectorAll(".project-name"))
-    .map(input => input.value.trim().toLowerCase());
-  const nameSet = new Set(names);
-  return nameSet.size !== names.length;
-}
-
-function validateTotalWeightIsInteger() {
-  const totalWeight = voterGroups.reduce((sum, [weight]) => sum + weight, 0);
-  return Number.isInteger(totalWeight);
-}
-
-</script>
-<script>
-function fillExample3() {
-  const projects = [
-    ["Clinic", 50.0],
-    ["Park", 30.0],
-    ["Library", 30.0],
-    ["Pool", 40.0]
-  ];
-
-  const voterGroupsToAdd = [
-    { count: 15, weight: 1.0, preferences: ["Clinic", "Park", "Library", "Pool"] },
-    { count: 15, weight: 1.0, preferences: ["Park", "Clinic", "Library", "Pool"] },
-    { count: 70, weight: 1.0, preferences: ["Pool", "Library", "Park", "Clinic"] }
-  ];
-
-  // Set budget + projects
-  document.getElementById("budget").value = 100;
-  document.getElementById("num-projects").value = projects.length;
-  generateProjectFields();
-
-  // Fill in project names and costs
-  const nameInputs = document.querySelectorAll(".project-name");
-  const costInputs = document.querySelectorAll(".project-cost");
-
-  projects.forEach(([name, cost], i) => {
-    nameInputs[i].value = name;
-    costInputs[i].value = cost;
-  });
-
-  // Display voter group form
-  document.getElementById("next-button-container").style.display = "block";
-  generatePreferenceInputs();
-  document.getElementById("voter-form").style.display = "block";
-
-  // Reset previous state
-  voterGroups = [];
-  document.getElementById("voter-group-list").innerHTML = "<h3>🗳️ Voter Groups Entered</h3>";
-  document.getElementById("voter-group-list").style.display = "block";
-
-  // Inject each voter group visually and internally
-  for (const group of voterGroupsToAdd) {
-    for (let i = 0; i < group.count; i++) {
-      voterGroups.push([group.weight, group.preferences]);
-    }
-    showSubmittedGroup(group.count, group.weight, group.preferences);
-  }
-
-  // Update hidden fields for form submission
-  document.getElementById("voters-json").value = JSON.stringify(voterGroups);
-  document.getElementById("projects-json").value = JSON.stringify(projects);
-
-  // Reset voter form
-  document.getElementById("voter-count").value = 1;
-  document.getElementById("voter-weight").value = 1.0;
-  const selects = document.querySelectorAll("#rank-inputs select");
-  selects.forEach(s => s.selectedIndex = 0);
-
-  document.querySelector("#voter-form button").textContent = "➕ Add Another Group";
-
-  alert("Example loaded. You can now submit or add more groups.");
-}
-
-
-</script>
-
-
-</body>
+ </body>
 </html>
