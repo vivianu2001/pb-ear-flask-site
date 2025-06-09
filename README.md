@@ -44,15 +44,12 @@ PB-EAR ensures proportionality and fairness in collective budget decisions when 
 
 ---
 
-## 📦 Repository Structure
+## 📚 Resources & Credits
 
-📁 pb-ear-flask-site/
-├── static/ # Static assets (images, styles, scripts)
-├── templates/ # HTML templates (with Jinja2)
-├── app.py # Flask backend logic
-├── pb_ear/ # Core PB-EAR algorithm (adapted from pabutools)
-├── example_data/ # Example instances and test cases
-└── README.md # You are here 😊
+- 🔗 [Original pabutools library](https://github.com/COMSOC-Community/pabutools)  
+- 📖 Research paper: [arXiv:2202.03134](https://arxiv.org/abs/2202.03134)  
+- 🔬 Special thanks to my instructor and the COMSOC research community for inspiration and support
+
 
 ---
 
