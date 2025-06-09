@@ -6,7 +6,7 @@ Welcome! This repository presents a full-stack implementation and web demonstrat
 
 ## 👩‍💻 About Me
 
-Hi! I'm **Vivian Umansky**, a computer science student at **Ariel University** 🇮🇱.  
+Hi! I'm **Vivian Umansky**, a computer science student at **Ariel University**.  
 This project was developed as part of my final assignment for the **Research Algorithms** course.
 
 ---
