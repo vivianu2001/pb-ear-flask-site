@@ -47,9 +47,7 @@ PB-EAR ensures proportionality and fairness in collective budget decisions when 
 ## 📚 Resources & Credits
 
 - 🔗 [Original pabutools library](https://github.com/COMSOC-Community/pabutools)  
-- 📖 Research paper: [arXiv:2202.03134](https://arxiv.org/abs/2202.03134)  
-- 🔬 Special thanks to my instructor and the COMSOC research community for inspiration and support
-
+- 📖 Research paper: [arXiv:1911.00864](https://arxiv.org/abs/1911.00864)
 
 ---
 
