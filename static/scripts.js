@@ -68,7 +68,6 @@ function generateProjectFields() {
   }
 }
 
-
 // Creates dropdowns for ranking projects based on the user-defined list
 function generatePreferenceInputs() {
   const inputs = document.querySelectorAll(".project-name");
@@ -105,7 +104,6 @@ function generatePreferenceInputs() {
   // Show voter form once preferences are generated
   document.getElementById("voter-form").style.display = "block";
 }
-
 
 let voterGroups = [];
 // Adds a voter group with specified weight and preferences
@@ -163,6 +161,17 @@ function submitVoterGroup() {
 }
 
 
+function addVoterGroup(count, weight, preferences) {
+  // Add to internal array
+  for (let i = 0; i < count; i++) {
+    voterGroups.push([weight, preferences]);
+  }
+
+  document.getElementById("voters-json").value = JSON.stringify(voterGroups);
+
+  showSubmittedGroup(count, weight, preferences);
+}
+
 // Updates hidden inputs and on-screen debug area with current voter groups
 function updateVoterGroupsDisplay() {
   document.getElementById("voter-groups-display").textContent = JSON.stringify(
@@ -206,7 +215,6 @@ function prepareSubmission() {
   return true;
 }
 
-
 // Shows a summary of a submitted voter group on screen
 function showSubmittedGroup(count, weight, preferences) {
   const container = document.getElementById("voter-group-list");
@@ -223,7 +231,6 @@ function showSubmittedGroup(count, weight, preferences) {
   container.appendChild(div);
 }
 
-
 // Checks if any duplicate project names exist (case-insensitive)
 function hasDuplicateProjects() {
   const names = Array.from(document.querySelectorAll(".project-name")).map(
@@ -233,86 +240,82 @@ function hasDuplicateProjects() {
   return nameSet.size !== names.length;
 }
 
-
 // Returns true only if the sum of all voter weights is an integer
 function validateTotalWeightIsInteger() {
   const totalWeight = voterGroups.reduce((sum, [weight]) => sum + weight, 0);
   return Number.isInteger(totalWeight);
 }
 
+function generateRandomInstance(numProjects, numGroups, budget) {
+  // 1. Generate random projects
+  const projects = [];
+  let totalCost = 0;
+  for (let i = 0; i < numProjects; i++) {
+    const cost = Math.floor(Math.random() * 30) + 20; // between 20-49
+    totalCost += cost;
+    projects.push(["P" + (i + 1), cost]);
+  }
 
-// Loads a predefined example with voters and projects (used for demo/testing)
-function fillExample3() {
-  const projects = [
-    ["Clinic", 50.0],
-    ["Park", 30.0],
-    ["Library", 30.0],
-    ["Pool", 40.0],
-  ];
+  // Ensure total cost > budget
+  if (totalCost <= budget) {
+    projects[0][1] += budget - totalCost + 10;
+    totalCost = projects.reduce((sum, p) => sum + p[1], 0);
+  }
 
-  const voterGroupsToAdd = [
-    {
-      count: 15,
-      weight: 1.0,
-      preferences: ["Clinic", "Park", "Library", "Pool"],
-    },
-    {
-      count: 15,
-      weight: 1.0,
-      preferences: ["Park", "Clinic", "Library", "Pool"],
-    },
-    {
-      count: 70,
-      weight: 1.0,
-      preferences: ["Pool", "Library", "Park", "Clinic"],
-    },
-  ];
+  // 2. Generate random voter groups
+  const voterGroupsToAdd = [];
+  for (let i = 0; i < numGroups; i++) {
+    const count = Math.floor(Math.random() * 10) + 5; // group size 5–14
+    const weight = 1.0;
+    const shuffled = [...projects.map((p) => p[0])].sort(
+      () => Math.random() - 0.5
+    );
+    voterGroupsToAdd.push({
+      count: count,
+      weight: weight,
+      preferences: shuffled,
+    });
+  }
 
-  // Set budget + projects
-  document.getElementById("budget").value = 100;
-  document.getElementById("num-projects").value = projects.length;
+  // 3. Populate the form with these values
+  document.getElementById("budget").value = budget;
+  document.getElementById("num-projects").value = numProjects;
   generateProjectFields();
 
-  // Fill in project names and costs
+  // Fill project names and costs
   const nameInputs = document.querySelectorAll(".project-name");
   const costInputs = document.querySelectorAll(".project-cost");
-
   projects.forEach(([name, cost], i) => {
     nameInputs[i].value = name;
     costInputs[i].value = cost;
   });
-
-  // Display voter group form
-  document.getElementById("next-button-container").style.display = "block";
   generatePreferenceInputs();
-  document.getElementById("voter-form").style.display = "block";
-
-  // Reset previous state
+  // Clear voter groups and show form
   voterGroups = [];
   document.getElementById("voter-group-list").innerHTML =
     "<h3>🗳️ Voter Groups Entered</h3>";
   document.getElementById("voter-group-list").style.display = "block";
+  document.getElementById("voter-form").style.display = "block";
 
-  // Inject each voter group visually and internally
-  for (const group of voterGroupsToAdd) {
-    for (let i = 0; i < group.count; i++) {
-      voterGroups.push([group.weight, group.preferences]);
-    }
-    showSubmittedGroup(group.count, group.weight, group.preferences);
-  }
+  voterGroupsToAdd.forEach((group) => {
+    addVoterGroup(group.count, group.weight, group.preferences);
+  });
 
-  // Update hidden fields for form submission
-  document.getElementById("voters-json").value = JSON.stringify(voterGroups);
-  document.getElementById("projects-json").value = JSON.stringify(projects);
-
-  // Reset voter form
-  document.getElementById("voter-count").value = 1;
-  document.getElementById("voter-weight").value = 1.0;
-  const selects = document.querySelectorAll("#rank-inputs select");
-  selects.forEach((s) => (s.selectedIndex = 0));
-
-  document.querySelector("#voter-form button").textContent =
-    "➕ Add Another Group";
-
-  alert("Example loaded. You can now submit or add more groups.");
+  alert("Random instance generated.");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("generate-random-button");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const numProjects = parseInt(
+        document.getElementById("num-projects-random").value
+      );
+      const numGroups = parseInt(
+        document.getElementById("num-groups-random").value
+      );
+      const budget = parseFloat(document.getElementById("budget-random").value);
+      generateRandomInstance(numProjects, numGroups, budget);
+    });
+  }
+});

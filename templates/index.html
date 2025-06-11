@@ -102,9 +102,20 @@
     <p style="margin-top: 10px;">
      Once all inputs are provided, click the submission button to run the PB-EAR algorithm and view the selected projects based on your scenario.
     </p>
-    <button onclick="fillExample3()" style="margin-top: 20px;">
-     📊 Fill Example Demo
-    </button>
+    <div style="margin-top: 30px; border: 1px solid #ccc; padding: 15px; border-radius: 8px;">
+    <h3>🎲 Generate Random Example</h3>
+    <label>Number of Projects:</label>
+    <input type="number" id="num-projects-random" value="5" min="1"/>
+    <br/>
+    <label>Number of Voter Groups:</label>
+    <input type="number" id="num-groups-random" value="3" min="1"/>
+    <br/>
+    <label>Total Budget:</label>
+    <input type="number" id="budget-random" value="100" min="1"/>
+    <br/>
+    <button id="generate-random-button" style="margin-top: 10px;">Generate Random Instance</button>
+    </div>
+
    </div>
    <label>
     Budget💵:
