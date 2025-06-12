@@ -25,7 +25,14 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def index():
+    log_path = os.path.join("logs", "pb_ear.log")
+    # Clear the log file if it exists
+    if os.path.exists(log_path):
+        with open(log_path, "w", encoding="utf-8") as f:
+            f.write("")  # Clear log contents
+
     return render_template("index.html")
+
 
 
 @app.route("/run", methods=["POST"])

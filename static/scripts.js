@@ -160,7 +160,6 @@ function submitVoterGroup() {
     "➕ Add Another Group";
 }
 
-
 function addVoterGroup(count, weight, preferences) {
   // Add to internal array
   for (let i = 0; i < count; i++) {
@@ -247,11 +246,23 @@ function validateTotalWeightIsInteger() {
 }
 
 function generateRandomInstance(numProjects, numGroups, budget) {
-  // 1. Generate random projects
   const projects = [];
   let totalCost = 0;
+
+  // 1. Create random weights for projects
+  const weights = [];
   for (let i = 0; i < numProjects; i++) {
-    const cost = Math.floor(Math.random() * 30) + 20; // between 20-49
+    weights.push(Math.random() + 0.3); // ensures no project gets 0
+  }
+
+  const weightSum = weights.reduce((a, b) => a + b, 0);
+
+  for (let i = 0; i < numProjects; i++) {
+    // Calculate the project's relative share out of the total weight
+    // Example: if this project's weight is 2, and total is 10 the share = 0.2
+    let share = weights[i] / weightSum;
+    let cost = Math.round(share * budget * 1.2); // 120% of budget total to allow over-budget
+    cost = Math.max(cost, 10); // minimum cost to avoid 0
     totalCost += cost;
     projects.push(["P" + (i + 1), cost]);
   }
@@ -259,13 +270,12 @@ function generateRandomInstance(numProjects, numGroups, budget) {
   // Ensure total cost > budget
   if (totalCost <= budget) {
     projects[0][1] += budget - totalCost + 10;
-    totalCost = projects.reduce((sum, p) => sum + p[1], 0);
   }
 
-  // 2. Generate random voter groups
+  // 2. Generate random voter groups (unchanged)
   const voterGroupsToAdd = [];
   for (let i = 0; i < numGroups; i++) {
-    const count = Math.floor(Math.random() * 10) + 5; // group size 5–14
+    const count = Math.floor(Math.random() * 10) + 5; // 5–14
     const weight = 1.0;
     const shuffled = [...projects.map((p) => p[0])].sort(
       () => Math.random() - 0.5
@@ -282,15 +292,14 @@ function generateRandomInstance(numProjects, numGroups, budget) {
   document.getElementById("num-projects").value = numProjects;
   generateProjectFields();
 
-  // Fill project names and costs
   const nameInputs = document.querySelectorAll(".project-name");
   const costInputs = document.querySelectorAll(".project-cost");
   projects.forEach(([name, cost], i) => {
     nameInputs[i].value = name;
     costInputs[i].value = cost;
   });
+
   generatePreferenceInputs();
-  // Clear voter groups and show form
   voterGroups = [];
   document.getElementById("voter-group-list").innerHTML =
     "<h3>🗳️ Voter Groups Entered</h3>";
